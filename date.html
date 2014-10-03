@@ -10,12 +10,22 @@
 var dateApp = angular.module('dateApp', []);
 
 var mainController = dateApp.controller('MainController', function($interval, $scope){
+    $scope.userDay = Math.floor(new Date().getTime()/86400/1000);
+
+    $scope.update = function(){
+        console.log("UserDay", $scope.userDay);
+        var ret = new Date($scope.userDay * 86400 * 1000).toString();
+        console.log("return",ret);
+        $scope.userDateString = ret;
+    };
+
     $scope.updateDate = function(){
          var dayNumber = new Date().getTime() / 86400 / 1000;
          $scope.dayNumber = dayNumber;
     };
 
     $interval($scope.updateDate, 1000);   
+    $scope.$watch('userDay', $scope.update);
     $scope.updateDate()
     return this;
 });
@@ -23,9 +33,17 @@ var mainController = dateApp.controller('MainController', function($interval, $s
 </script>
 </head>
 <body >
-<div class="jumbotron" ng-controller="MainController as mc" >
-  <h1 id="date">{{dayNumber | number:4}}</h1>
+
+<div class="container"  ng-controller="MainController as mc" >
+    <div class="jumbotron">
+      <h1 id="date">{{dayNumber | number:4}}</h1>
+    </div>
+    <form class="form">
+        <p> Day: <input name="userday" ng-model="userDay"  > </p>
+        <p> Date: {{ userDateString }} </p>
+    </form>
 </div>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 </body>
