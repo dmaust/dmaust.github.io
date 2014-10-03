@@ -24,7 +24,7 @@ var mainController = dateApp.controller('MainController', function($interval, $s
 </head>
 <body >
 <div class="jumbotron" ng-controller="MainController as mc" >
-  <h1 id="date">{{dayNumber}}</h1>
+  <h1 id="date">{{dayNumber | number:4}}</h1>
 </div>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
