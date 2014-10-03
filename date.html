@@ -14,7 +14,7 @@ var mainController = dateApp.controller('MainController', function($interval, $s
 
     $scope.update = function(){
         console.log("UserDay", $scope.userDay);
-        var ret = new Date($scope.userDay * 86400 * 1000).toString();
+        var ret = new Date($scope.userDay * 86400 * 1000).toUTCString();
         console.log("return",ret);
         $scope.userDateString = ret;
     };
