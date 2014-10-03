@@ -1,18 +1,34 @@
-<html>
+<html ng-app="dateApp">
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
 <script>
-function updateDate(){
-    var dayNumber = new Date().getTime() / 86400 / 1000;
-    document.getElementById('date').innerHTML = dayNumber;
-    setTimeout(updateDate, 1000);
-}
-function onload(){
-    updateDate();
-}
+
+
+var dateApp = angular.module('dateApp', []);
+
+var mainController = dateApp.controller('MainController', function($interval, $scope){
+    $scope.updateDate = function(){
+         var dayNumber = new Date().getTime() / 86400 / 1000;
+         $scope.dayNumber = dayNumber;
+    };
+
+    $interval($scope.updateDate, 1000);   
+    $scope.updateDate()
+    return this;
+});
+
 </script>
 </head>
-<body onload="onload();">
-<div id="date"></div>
+<body >
+<div class="jumbotron" ng-controller="MainController as mc" >
+  <h1 id="date">{{dayNumber}}</h1>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 </body>
 </html>
+
 
