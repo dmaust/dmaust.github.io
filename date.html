@@ -36,7 +36,7 @@ var mainController = dateApp.controller('MainController', function($interval, $s
 
 <div class="container"  ng-controller="MainController as mc" >
     <div class="jumbotron">
-      <h1 id="date">{{dayNumber | number:4}}</h1>
+      <h1 id="date">Now: {{dayNumber | number:4}}</h1>
     </div>
     <form class="form">
         <p> Day: <input name="userday" ng-model="userDay"  > </p>
