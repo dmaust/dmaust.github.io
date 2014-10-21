@@ -13,9 +13,7 @@ var mainController = dateApp.controller('MainController', function($interval, $s
     $scope.userDay = Math.floor(new Date().getTime()/86400/1000);
 
     $scope.update = function(){
-        console.log("UserDay", $scope.userDay);
         var ret = new Date($scope.userDay * 86400 * 1000).toUTCString();
-        console.log("return",ret);
         return ret;
     };
 
@@ -23,7 +21,10 @@ var mainController = dateApp.controller('MainController', function($interval, $s
          var dayNumber = new Date().getTime() / 86400 / 1000;
          $scope.dayNumber = dayNumber;
     };
-
+    $scope.getNowString = function(){
+        var ret = new Date($scope.dayNumber * 86400 * 1000).toUTCString();
+        return ret;
+    };
     $interval($scope.updateDate, 100);   
     $scope.updateDate();
 });
@@ -34,7 +35,8 @@ var mainController = dateApp.controller('MainController', function($interval, $s
 
 <div class="container"  ng-controller="MainController as mc" >
     <div class="jumbotron">
-      <h1 id="date">Now: {{dayNumber | number:5 }}</h1>
+      <h1 id="date">Day : {{dayNumber | number:5 }}</h1>
+      <h2> {{ getNowString()}} </h2>
     </div>
     <form class="form">
         <p> Day: <input name="userday" ng-model="userDay"  > </p>
